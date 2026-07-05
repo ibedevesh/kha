@@ -4,20 +4,34 @@
 
 ---
 
-## Why
+## What is Kha
 
-A language model computes an answer, then narrates a justification. The narration is not the
-computation, so on anything hard it is confidently, silently wrong, and differently wrong each
-time. You cannot tell which answers to trust without redoing them yourself, which defeats the point.
+Kha puts an AI inside an environment. The AI is free to think and act, but its actions are bounded
+by the environment's rules, the same way a person is free yet still cannot break the laws of
+physics. Because the AI only ever supplies inputs and the environment computes every result, you
+can rely on the outcome completely: the AI cannot cheat, cannot escape, and cannot produce a wrong
+result, whatever it believes.
 
-Kha removes the model from the trust path. The model only supplies **inputs**; a deterministic
-**environment** computes every **result**. The environment's rules are written once as a spec and
-**proven once**, a kernel certifies concrete results and an SMT solver proves safety properties
-over *all* inputs. At runtime there is no proving and no model arithmetic: just the proven engine.
+On its own an AI is confidently unreliable. Asked to compute a real income tax or import duty, a
+leading general-purpose model often returns a wrong figure and then justifies that wrong figure
+fluently (our experiments below show exactly this). That is fine for a conversation, but it is why
+you cannot yet hand an AI a job that has to be correct.
 
-The model can say anything. Only the environment's computed figure reaches the user.
+Kha changes the arrangement. You write the rules once, prove them, load them as an environment, and
+drop the AI inside. The AI does not know the rules and never computes the answer, so it cannot game
+them or slip past them. Every result comes from the proven environment, and every step the AI takes
+inside it is recorded and checkable. For that task the AI becomes reliable, with a proof.
 
-## The recipe
+An environment is like a room with fixed laws. The AI moves freely inside, but the walls, the
+floor, and gravity are not up for negotiation. Build one room per job (income tax, customs duty,
+and so on), load it, and the AI inside can only ever act within its laws.
+
+## How Kha works
+
+The AI's only job is to supply inputs. The environment owns the computation and the output, and
+because the AI never sees the rules, it cannot bend them or escape them.
+
+**The recipe:**
 
 1. **Find the rules**, from an authoritative public source. Never invent them.
 2. **Write them once as a spec**, one source of truth (`spec.py`).
@@ -25,7 +39,7 @@ The model can say anything. Only the environment's computed figure reaches the u
 4. **Load the proven environment**, runtime executes the oracle generated from the same spec.
 5. **Drop a model in**, it extracts inputs; the environment computes results.
 
-## How it works
+**Under the hood**, the three backends are generated from that single source, so they can never drift:
 
 ```
                          ┌──────────► Lean   →  kernel certifies concrete results (zero axioms)
@@ -38,6 +52,11 @@ The model can say anything. Only the environment's computed figure reaches the u
 ```
 
 The proof is a one-time build step. It writes a `proof_certificate.json`; the runtime just loads it.
+
+Because every consequential step happens inside the environment, the whole run is inspectable: you
+get the result, its derivation, and a saved certificate. The AI can say anything; only the
+environment's proven figure reaches the user. See [Results](#results) for the measured gap between a
+general model on its own and the same task run inside a Kha environment.
 See [`theory.md`](theory.md) for the intuitions behind the design.
 
 ## Quickstart
