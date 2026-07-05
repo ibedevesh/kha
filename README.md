@@ -140,4 +140,4 @@ effects). Everything between is proven and out of the model's hands.
 
 ## License
 
-MIT.
+MIT. Contact: ibedevesh@gmail.com
