@@ -1,0 +1,363 @@
+[
+  {
+    "funcs": [
+      [
+        "slab26",
+        [
+          "ti"
+        ],
+        "(5 * (min(ti, 500000) - 250000) // 100 if ti > 250000 else 0) + (20 * (min(ti, 1000000) - 500000) // 100 if ti > 500000 else 0) + (30 * (ti - 1000000) // 100 if ti > 1000000 else 0)"
+      ],
+      [
+        "surRate26",
+        [
+          "ti"
+        ],
+        "0 if ti <= 5000000 else 10 if ti <= 10000000 else 15 if ti <= 20000000 else 25 if ti <= 50000000 else 37"
+      ],
+      [
+        "surRaw26",
+        [
+          "ti"
+        ],
+        "(surRate26(ti) * slab26(ti)) // 100"
+      ],
+      [
+        "marginC26",
+        [
+          "ti"
+        ],
+        "0 if ti <= 5000000 else 5000000 if ti <= 10000000 else 10000000 if ti <= 20000000 else 20000000 if ti <= 50000000 else 50000000"
+      ],
+      [
+        "taxPlusSur26",
+        [
+          "ti"
+        ],
+        "slab26(ti) + surRaw26(ti)"
+      ],
+      [
+        "marginCap26",
+        [
+          "ti"
+        ],
+        "taxPlusSur26(ti) if marginC26(ti) == 0 else taxPlusSur26(marginC26(ti)) + (ti - marginC26(ti))"
+      ],
+      [
+        "taxSurRelieved26",
+        [
+          "ti"
+        ],
+        "min(taxPlusSur26(ti), marginCap26(ti))"
+      ],
+      [
+        "cess26",
+        [
+          "ti"
+        ],
+        "(4 * taxSurRelieved26(ti)) // 100"
+      ],
+      [
+        "tax26",
+        [
+          "ti"
+        ],
+        "taxSurRelieved26(ti) + cess26(ti)"
+      ],
+      [
+        "slabInd",
+        [
+          "ti",
+          "age"
+        ],
+        "((20 * (min(ti, 1000000) - 500000) // 100 if ti > 500000 else 0) + (30 * (ti - 1000000) // 100 if ti > 1000000 else 0)) if age >= 80 else ((5 * (min(ti, 500000) - 300000) // 100 if ti > 300000 else 0) + (20 * (min(ti, 1000000) - 500000) // 100 if ti > 500000 else 0) + (30 * (ti - 1000000) // 100 if ti > 1000000 else 0)) if age >= 60 else slab26(ti)"
+      ],
+      [
+        "surRawInd",
+        [
+          "ti",
+          "age"
+        ],
+        "(surRate26(ti) * slabInd(ti, age)) // 100"
+      ],
+      [
+        "taxPlusSurInd",
+        [
+          "ti",
+          "age"
+        ],
+        "slabInd(ti, age) + surRawInd(ti, age)"
+      ],
+      [
+        "marginCapInd",
+        [
+          "ti",
+          "age"
+        ],
+        "taxPlusSurInd(ti, age) if marginC26(ti) == 0 else taxPlusSurInd(marginC26(ti), age) + (ti - marginC26(ti))"
+      ],
+      [
+        "taxSurRelInd",
+        [
+          "ti",
+          "age"
+        ],
+        "min(taxPlusSurInd(ti, age), marginCapInd(ti, age))"
+      ],
+      [
+        "taxInd",
+        [
+          "ti",
+          "age"
+        ],
+        "taxSurRelInd(ti, age) + (4 * taxSurRelInd(ti, age)) // 100"
+      ],
+      [
+        "slabCo",
+        [
+          "ti",
+          "domestic",
+          "small"
+        ],
+        "((25 * ti) // 100 if small == 1 else (30 * ti) // 100) if domestic == 1 else (35 * ti) // 100"
+      ],
+      [
+        "surRateCo",
+        [
+          "ti",
+          "domestic"
+        ],
+        "(0 if ti <= 10000000 else 7 if ti <= 100000000 else 12) if domestic == 1 else (0 if ti <= 10000000 else 2 if ti <= 100000000 else 5)"
+      ],
+      [
+        "surRawCo",
+        [
+          "ti",
+          "domestic",
+          "small"
+        ],
+        "(surRateCo(ti, domestic) * slabCo(ti, domestic, small)) // 100"
+      ],
+      [
+        "marginCCo",
+        [
+          "ti"
+        ],
+        "0 if ti <= 10000000 else 10000000 if ti <= 100000000 else 100000000"
+      ],
+      [
+        "taxPlusSurCo",
+        [
+          "ti",
+          "domestic",
+          "small"
+        ],
+        "slabCo(ti, domestic, small) + surRawCo(ti, domestic, small)"
+      ],
+      [
+        "marginCapCo",
+        [
+          "ti",
+          "domestic",
+          "small"
+        ],
+        "taxPlusSurCo(ti, domestic, small) if marginCCo(ti) == 0 else taxPlusSurCo(marginCCo(ti), domestic, small) + (ti - marginCCo(ti))"
+      ],
+      [
+        "taxSurRelCo",
+        [
+          "ti",
+          "domestic",
+          "small"
+        ],
+        "min(taxPlusSurCo(ti, domestic, small), marginCapCo(ti, domestic, small))"
+      ],
+      [
+        "taxCo",
+        [
+          "ti",
+          "domestic",
+          "small"
+        ],
+        "taxSurRelCo(ti, domestic, small) + (4 * taxSurRelCo(ti, domestic, small)) // 100"
+      ],
+      [
+        "surRateExcl",
+        [
+          "ti",
+          "excl"
+        ],
+        "0 if ti <= 5000000 else 10 if ti <= 10000000 else 37 if excl > 50000000 else 25 if excl > 20000000 else 15"
+      ],
+      [
+        "taxNormalPart",
+        [
+          "normal",
+          "age"
+        ],
+        "slabInd(normal, age)"
+      ],
+      [
+        "taxDivPart",
+        [
+          "normal",
+          "divcg",
+          "age"
+        ],
+        "slabInd(normal + divcg, age) - slabInd(normal, age)"
+      ],
+      [
+        "surchargeDiv",
+        [
+          "normal",
+          "divcg",
+          "age"
+        ],
+        "(surRateExcl(normal + divcg, normal) * taxNormalPart(normal, age)) // 100 + (min(surRateExcl(normal + divcg, normal), 15) * taxDivPart(normal, divcg, age)) // 100"
+      ],
+      [
+        "taxIndDiv",
+        [
+          "normal",
+          "divcg",
+          "age"
+        ],
+        "(slabInd(normal + divcg, age) + surchargeDiv(normal, divcg, age)) + (4 * (slabInd(normal + divcg, age) + surchargeDiv(normal, divcg, age))) // 100"
+      ],
+      [
+        "taxIndNaive",
+        [
+          "normal",
+          "divcg",
+          "age"
+        ],
+        "(slabInd(normal + divcg, age) + (surRate26(normal + divcg) * slabInd(normal + divcg, age)) // 100) + (4 * (slabInd(normal + divcg, age) + (surRate26(normal + divcg) * slabInd(normal + divcg, age)) // 100)) // 100"
+      ],
+      [
+        "slabNew",
+        [
+          "ti"
+        ],
+        "(5 * (min(ti, 800000) - 400000) // 100 if ti > 400000 else 0) + (10 * (min(ti, 1200000) - 800000) // 100 if ti > 800000 else 0) + (15 * (min(ti, 1600000) - 1200000) // 100 if ti > 1200000 else 0) + (20 * (min(ti, 2000000) - 1600000) // 100 if ti > 1600000 else 0) + (25 * (min(ti, 2400000) - 2000000) // 100 if ti > 2000000 else 0) + (30 * (ti - 2400000) // 100 if ti > 2400000 else 0)"
+      ],
+      [
+        "baseNew",
+        [
+          "ti"
+        ],
+        "0 if ti <= 1200000 else min(slabNew(ti), ti - 1200000)"
+      ],
+      [
+        "surRateNew",
+        [
+          "ti"
+        ],
+        "0 if ti <= 5000000 else 10 if ti <= 10000000 else 15 if ti <= 20000000 else 25"
+      ],
+      [
+        "marginCNew",
+        [
+          "ti"
+        ],
+        "0 if ti <= 5000000 else 5000000 if ti <= 10000000 else 10000000 if ti <= 20000000 else 20000000"
+      ],
+      [
+        "taxPlusSurNew",
+        [
+          "ti"
+        ],
+        "baseNew(ti) + (surRateNew(ti) * baseNew(ti)) // 100"
+      ],
+      [
+        "marginCapNew",
+        [
+          "ti"
+        ],
+        "taxPlusSurNew(ti) if marginCNew(ti) == 0 else taxPlusSurNew(marginCNew(ti)) + (ti - marginCNew(ti))"
+      ],
+      [
+        "taxSurRelNew",
+        [
+          "ti"
+        ],
+        "min(taxPlusSurNew(ti), marginCapNew(ti))"
+      ],
+      [
+        "taxNew",
+        [
+          "ti"
+        ],
+        "taxSurRelNew(ti) + (4 * taxSurRelNew(ti)) // 100"
+      ]
+    ],
+    "figures": [
+      {
+        "func": "taxNew",
+        "args": [
+          1200000
+        ],
+        "value": 0,
+        "certified": true,
+        "axioms": []
+      },
+      {
+        "func": "taxNew",
+        "args": [
+          3000000
+        ],
+        "value": 499200,
+        "certified": true,
+        "axioms": []
+      },
+      {
+        "func": "taxNew",
+        "args": [
+          25000000
+        ],
+        "value": 9204000,
+        "certified": true,
+        "axioms": []
+      },
+      {
+        "func": "taxInd",
+        "args": [
+          2100000,
+          45
+        ],
+        "value": 460200,
+        "certified": true,
+        "axioms": []
+      },
+      {
+        "func": "taxCo",
+        "args": [
+          120000000,
+          1,
+          1
+        ],
+        "value": 34944000,
+        "certified": true,
+        "axioms": []
+      }
+    ],
+    "guardrails": [
+      {
+        "label": "tax >= 0 (new regime)",
+        "result": "unsat",
+        "proven": true
+      },
+      {
+        "label": "tax <= income (new regime)",
+        "result": "unsat",
+        "proven": true
+      },
+      {
+        "label": "no single-rupee cliff (new regime)",
+        "result": "unsat",
+        "proven": true
+      }
+    ],
+    "all_proven": true,
+    "note": "income tax, one-time Lean+Z3 proof"
+  }
+]

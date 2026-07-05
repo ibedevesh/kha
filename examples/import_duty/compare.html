@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>General AI vs Kha, import duty</title>
+<style>
+ :root{--ground:#F5F6F8;--surface:#fff;--raise:#FBFCFD;--text:#0F141B;--muted:#5B6672;--faint:#8A94A0;
+  --line:#E4E8ED;--teal:#0E6E57;--teal-soft:#E5F1ED;--gold:#A9854E;--red:#C0392B;--red-soft:#FBEAE8;--user-bg:#ECEEF1;
+  --serif:"Iowan Old Style",Palatino,Georgia,serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;}
+ *{box-sizing:border-box}html,body{height:100%}
+ body{margin:0;background:var(--ground);color:var(--text);font-family:var(--sans);line-height:1.5;display:flex;flex-direction:column;height:100vh}
+ .bar{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--line);flex:none}
+ .logo{display:flex;align-items:center;gap:11px}.word{font-family:var(--serif);font-size:18px;font-weight:600}
+ .mark{width:24px;height:24px;position:relative}.mark::before{content:"";position:absolute;inset:0;background:var(--gold);transform:rotate(45deg);border-radius:5px}.mark::after{content:"";position:absolute;inset:7px;background:var(--ground);transform:rotate(45deg);border-radius:2px}
+ .nav{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none}.nav:hover{color:var(--teal)}
+ .intro{padding:14px 22px 6px;max-width:900px;margin:0 auto;width:100%}
+ .intro h1{font-family:var(--serif);font-size:22px;font-weight:600;margin:0 0 3px}.intro p{color:var(--muted);margin:0;font-size:13.5px}
+ .cols{flex:1;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:900px;width:100%;margin:0 auto;padding:12px 22px 0;min-height:0}
+ @media(max-width:720px){.cols{grid-template-columns:1fr;overflow-y:auto}}
+ .col{display:flex;flex-direction:column;min-height:0;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden}
+ .col.plain{border-color:#EAD9D6}.col.kha{border-color:#CDE5DC}
+ .chead{flex:none;padding:11px 16px;border-bottom:1px solid var(--line);display:flex;gap:9px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+ .chead .tag{padding:2px 8px;border-radius:999px;font-size:10px}.plain .tag{background:var(--red-soft);color:var(--red)}.kha .tag{background:var(--teal-soft);color:var(--teal)}
+ .tally{flex:none;font-family:var(--mono);font-size:11px;color:var(--faint);height:0;overflow:hidden}.tally.on{height:auto;padding:8px 16px;border-bottom:1px solid var(--line)}
+ .plain .tally .warn{color:var(--red)}.kha .tally .ok{color:var(--teal)}.tally b{font-weight:600}
+ .feed{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+ .b{max-width:92%;padding:9px 13px;border-radius:13px;font-size:14px;white-space:pre-wrap}.b.user{align-self:flex-end;background:var(--user-bg)}.b.bot{align-self:flex-start;background:var(--raise);border:1px solid var(--line)}
+ .amt{font-family:var(--serif);font-size:24px;font-weight:600;margin:2px 0}.amt .r{color:var(--faint);font-size:.55em}.plain .amt.wrong{color:var(--red)}.kha .amt{color:var(--teal)}
+ .tagline{font-family:var(--mono);font-size:11px;margin-top:3px}.kha .tagline{color:var(--teal)}
+ .again{align-self:flex-start;font-family:var(--mono);font-size:11.5px;color:var(--muted);background:none;border:1px dashed var(--line);border-radius:8px;padding:5px 10px;cursor:pointer}.again:hover{border-color:var(--red);color:var(--red)}
+ .proof{font-family:var(--mono);font-size:10.5px;color:var(--faint);border-left:2px solid var(--teal-soft);padding-left:9px;white-space:pre-wrap}
+ .showproof{font-family:var(--mono);font-size:11px;color:var(--teal);background:none;border:0;cursor:pointer;padding:0;text-decoration:underline;align-self:flex-start}
+ .dots span{display:inline-block;width:6px;height:6px;margin-right:4px;border-radius:50%;background:var(--faint);animation:b 1.2s infinite both}.dots span:nth-child(2){animation-delay:.2s}.dots span:nth-child(3){animation-delay:.4s}@keyframes b{0%,80%,100%{opacity:.25}40%{opacity:1}}
+ .foot{flex:none;max-width:900px;width:100%;margin:0 auto;padding:12px 22px 18px}
+ .chiprow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:9px}.chip{font-family:var(--mono);font-size:11.5px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}.chip:hover{border-color:var(--teal);color:var(--teal)}
+ form{display:flex;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:7px 7px 7px 16px}form:focus-within{border-color:var(--teal)}form input{flex:1;border:0;background:transparent;font-size:15px}form input:focus{outline:none}form button{border:0;background:var(--teal);color:#fff;width:38px;height:38px;border-radius:10px;cursor:pointer}
+ .fade{animation:f .25s ease both}@keyframes f{from{opacity:0;transform:translateY(3px)}to{opacity:1}}
+</style></head><body>
+ <div class="bar"><div class="logo"><span class="mark"></span><span class="word">Kha</span></div><a class="nav" href="/">← Back to the assistant</a></div>
+ <div class="intro"><h1>The same import, costed two ways.</h1>
+  <p>Your message goes to both. Give the HSN code, the value, and the IGST rate. Ask each the same thing as often as you like, and compare.</p></div>
+ <div class="cols">
+  <div class="col plain"><div class="chead">General AI <span class="tag">no verification</span></div><div class="tally" id="pt"></div><div class="feed" id="pf"></div></div>
+  <div class="col kha"><div class="chead">Kha <span class="tag">exact · every time</span></div><div class="tally" id="kt"></div><div class="feed" id="kf"></div></div>
+ </div>
+ <div class="foot"><div class="chiprow" id="chiprow"></div>
+  <form id="form"><input id="q" autocomplete="off" placeholder="Message both…"><button id="go" type="submit">↑</button></form></div>
+<script>
+const PRESETS=[
+ ["Car · 87032391 · ₹20L · 28%","importing a motor car, HSN 87032391, assessable value 20 lakh, IGST 28%"]
+ ["Cashew · 08013100 · ₹10L · 5%","importing cashew nuts in shell, HSN 08013100, assessable value 10 lakh, IGST 5%"]
+ ["Laptop · 84713010 · ₹80k · 18%","importing a personal computer, HSN 84713010, value 80000, IGST 18%"]];
+const inr=n=>Number(n).toLocaleString('en-IN'),$=id=>document.getElementById(id);
+const pf=$('pf'),kf=$('kf'),ph=[],kh=[];let attempts=[],truth=null;
+PRESETS.forEach(([l,t])=>{const c=document.createElement('button');c.className='chip';c.textContent=l;c.onclick=()=>send(t);$('chiprow').appendChild(c);});
+function tally(){const pt=$('pt'),kt=$('kt');if(!attempts.length){pt.classList.remove('on');kt.classList.remove('on');return;}
+ const d=new Set(attempts).size;let s='<b>'+attempts.length+'</b> '+(attempts.length===1?'answer':'answers')+' · <b>'+d+'</b> distinct';
+ if(truth!=null){const w=attempts.filter(t=>t!==truth).length;s+=' · <span class="warn"><b>'+w+'</b> disagree with the exact figure</span>';}
+ pt.innerHTML=s;pt.classList.add('on');if(truth!=null){kt.innerHTML='<span class="ok"><b>1</b> figure · unchanged across every ask</span>';kt.classList.add('on');}}
+function bubble(f,c,t){const d=document.createElement('div');d.className='b '+c+' fade';d.textContent=t;f.appendChild(d);f.scrollTop=f.scrollHeight;return d;}
+function typing(f){const d=document.createElement('div');d.className='b bot fade';d.innerHTML='<div class="dots"><span></span><span></span><span></span></div>';f.appendChild(d);f.scrollTop=f.scrollHeight;return d;}
+function renderPlain(el,d){let h=d.reply?'<div>'+d.reply+'</div>':'';if(d.value!=null)h+='<div class="amt wrong"><span class="r">₹</span>'+inr(d.value)+'</div>';el.className='b bot fade';el.innerHTML=h||'(no reply)';
+ if(d.value!=null){attempts.push(d.value);tally();const btn=document.createElement('button');btn.className='again';btn.textContent='↻ ask again (same question)';btn.onclick=()=>again(btn);pf.appendChild(btn);pf.scrollTop=pf.scrollHeight;}}
+function renderKha(el,d){let h=d.reply?'<div>'+d.reply+'</div>':'';if(d.value!=null)h+='<div class="amt"><span class="r">₹</span>'+inr(d.value)+'</div><div class="tagline">✓ exact, the same figure every time</div>';el.className='b bot fade';el.innerHTML=h||'(no reply)';
+ if(d.value!=null){truth=d.value;tally();if(d.steps&&d.steps.length){const sp=document.createElement('button');sp.className='showproof';sp.textContent='show the breakdown ▾';const pr=document.createElement('div');pr.className='proof';pr.style.display='none';pr.textContent=d.steps.filter(s=>s.amount!=null).map(s=>s.head+': ₹'+inr(s.amount)).join('\n');sp.onclick=()=>{pr.style.display=pr.style.display==='none'?'block':'none';};kf.appendChild(sp);kf.appendChild(pr);kf.scrollTop=kf.scrollHeight;}}}
+async function call(u,h){const r=await fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:h})});if(!r.ok)throw new Error('server '+r.status);return r.json();}
+async function again(btn){btn.disabled=true;btn.textContent='↻ asking again…';const t=typing(pf);try{renderPlain(t,await call('/api/plain',ph));}catch(e){t.textContent='error: '+e;}finally{btn.textContent='↻ ask again (same question)';btn.disabled=false;}}
+async function send(text){text=(text||$('q').value).trim();if(!text)return;$('q').value='';$('go').disabled=true;attempts=[];truth=null;tally();
+ bubble(pf,'user',text);bubble(kf,'user',text);ph.push({role:'user',content:text});kh.push({role:'user',content:text});
+ const pt=typing(pf),kt=typing(kf);const [p,k]=await Promise.allSettled([call('/api/plain',ph),call('/api/chat',kh)]);
+ if(p.status==='fulfilled'){renderPlain(pt,p.value);ph.push({role:'assistant',content:p.value.reply||''});}else pt.textContent='error: '+p.reason;
+ if(k.status==='fulfilled'){renderKha(kt,k.value);kh.push({role:'assistant',content:k.value.reply||''});}else kt.textContent='error: '+k.reason;
+ $('go').disabled=false;$('q').focus();}
+$('form').addEventListener('submit',e=>{e.preventDefault();send();});
+</script></body></html>

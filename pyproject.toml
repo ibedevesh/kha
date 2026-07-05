@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kha"
+version = "0.1.0"
+description = "A proven space for AI to act in. Results are computed by the environment, not the model."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "ibedevesh", email = "ibedevesh@gmail.com" }]
+keywords = ["llm", "formal-methods", "lean", "z3", "smt", "verification", "agents"]
+dependencies = ["z3-solver>=4.12"]
+
+[project.urls]
+Homepage = "https://github.com/ibedevesh/kha"
+Repository = "https://github.com/ibedevesh/kha"
+
+# The proving step also requires Lean 4 (via elan) as an external prerequisite:
+#   https://leanprover.github.io, then  export PATH="$HOME/.elan/bin:$PATH"
+# The runtime does not need Lean.
+
+[tool.setuptools]
+packages = ["kha"]
