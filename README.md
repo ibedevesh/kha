@@ -78,21 +78,29 @@ via `KHA_BASE_URL` / `KHA_API_KEY` / `KHA_MODEL`, or pass your own callable.
 
 ## Benchmarks
 
-We tested **Claude Opus 4.8** (state of the art, July 2026) on 20 hard income-tax cases: the
-interacting rules where computation actually gets hard, marginal relief just above the surcharge
-thresholds, the dividend and capital-gains surcharge carve-out, old-regime age brackets, and company
-marginal relief. The model is handed the full, correct rules; the correct answer is the kernel-proven
-engine. Kha runs that same engine, so it is exact by construction.
+We tested **Claude Opus 4.8** (state of the art, July 2026) on **38 hard cases across two domains of
+Indian government rules**: income tax (the Finance Bill, 2026) and import duty (the Customs Tariff
+First Schedule, CBIC). These are the cases where the rules interact and the computation gets hard,
+marginal relief just above the surcharge thresholds, the dividend and capital-gains surcharge
+carve-out, old-regime age brackets, company relief, and, for imports, recalling the official duty
+rate for a product and running the BCD to SWS to IGST cascade. The model is handed the full method;
+the correct answer is the kernel-proven engine. Kha runs that same engine, so it is exact by
+construction.
 
-![Hard tax cases answered correctly](assets/accuracy.png)
+![Accuracy on hard cases](assets/accuracy.png)
 
-Opus 4.8 was fully correct on **11 of 20 cases (55%)** and wrong on the other **9 (45%)**, with
-errors up to **₹47.8 lakh**, and it gave a **different answer across runs** on the hardest cases (a
-dividend and capital-gains case, for example: ₹34.9M one run, ₹40.1M the next, correct ₹39.7M). Every
-wrong answer came with a fluent, confident justification. Kha was exact on all 20, every run,
-kernel-certified.
+Opus 4.8 was fully correct on just over half: **11 of 20 income-tax cases (55%)**, **9 of 18 imports
+(50%)**, **20 of 38 overall (53%)**. It was wrong on the rest, with errors up to **₹47.8 lakh**, and
+it gave a **different answer across runs** on the hardest cases. Every wrong answer came with a
+fluent, confident justification. Kha was exact on all 38, every run, kernel-certified.
 
 ![Per-case results](assets/cases_grid.png)
+
+Two everyday examples of the failure:
+- **Income tax:** a dividend and capital-gains case. ₹34.9M one run, ₹40.1M the next, correct ₹39.7M.
+- **Import duty:** cashew nuts. The real Basic Customs Duty is 30%, Opus 4.8 used about 2.5% and
+  priced the duty at **₹78,875** against the correct **₹3,96,500**, wrong by five times, and the
+  same wrong figure both runs. It looks reliable. It is not.
 
 ![Kha vs Claude Opus 4.8](assets/radar.png)
 
@@ -100,9 +108,8 @@ A model can be accurate, and even consistent, on a good day. It still scores zer
 that matter for real work: a **verifiable proof** of the answer, and being **safe by construction**
 (a model can output any number, Kha cannot output a value the rules forbid).
 
-Raw per-case results: [`assets/benchmark_opus48.json`](assets/benchmark_opus48.json). A separate
-import-duty test showed the same pattern from the other direction: even Opus 4.8 misremembers the
-official duty rate, pricing a car at ₹33,76,000 in 2 of 3 runs against the correct ₹40,80,000.
+Raw per-case results: [`assets/benchmark_opus48.json`](assets/benchmark_opus48.json) (income tax)
+and [`assets/duty_benchmark_opus48.json`](assets/duty_benchmark_opus48.json) (import duty).
 
 ### Why this matters
 

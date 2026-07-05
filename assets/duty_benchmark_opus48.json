@@ -1,0 +1,236 @@
+[
+  {
+    "hsn": "87032391",
+    "desc": "a mid-size petrol motor car",
+    "real_bcd": 125.0,
+    "truth": 4080000.0,
+    "runs": [
+      3376000,
+      2531200
+    ],
+    "exact": 0,
+    "of": 2,
+    "worst_err": 1548800.0
+  },
+  {
+    "hsn": "08013100",
+    "desc": "cashew nuts in shell",
+    "real_bcd": 30.0,
+    "truth": 396500.0,
+    "runs": [
+      78875,
+      78875
+    ],
+    "exact": 0,
+    "of": 2,
+    "worst_err": 317625.0
+  },
+  {
+    "hsn": "84713010",
+    "desc": "a personal computer",
+    "real_bcd": 0.0,
+    "truth": 14400.0,
+    "runs": [
+      14400,
+      14400
+    ],
+    "exact": 2,
+    "of": 2,
+    "worst_err": 0.0
+  },
+  {
+    "hsn": "08011100",
+    "desc": "desiccated coconut",
+    "real_bcd": 70.0,
+    "truth": 429250.0,
+    "runs": [
+      602500,
+      429250
+    ],
+    "exact": 1,
+    "of": 2,
+    "worst_err": 173250.0
+  },
+  {
+    "hsn": "71131910",
+    "desc": "unstudded gold jewellery",
+    "real_bcd": 20.0,
+    "truth": 769800.0,
+    "runs": [
+      769800,
+      769800
+    ],
+    "exact": 2,
+    "of": 2,
+    "worst_err": 0.0
+  },
+  {
+    "hsn": "22030000",
+    "desc": "beer made from malt",
+    "real_bcd": 100.0,
+    "truth": 675200.0,
+    "runs": [
+      675200,
+      675200
+    ],
+    "exact": 2,
+    "of": 2,
+    "worst_err": 0.0
+  },
+  {
+    "hsn": "33049910",
+    "desc": "face cream / cosmetics",
+    "real_bcd": 20.0,
+    "truth": 336960.0,
+    "runs": [
+      336960,
+      336960
+    ],
+    "exact": 2,
+    "of": 2,
+    "worst_err": 0.0
+  },
+  {
+    "hsn": "64039190",
+    "desc": "leather footwear",
+    "real_bcd": 35.0,
+    "truth": 190290.0,
+    "runs": [
+      190290,
+      190290
+    ],
+    "exact": 2,
+    "of": 2,
+    "worst_err": 0.0
+  },
+  {
+    "hsn": "09024030",
+    "desc": "black tea in bulk",
+    "real_bcd": 100.0,
+    "truth": 301250.0,
+    "runs": [
+      301250,
+      301250
+    ],
+    "exact": 2,
+    "of": 2,
+    "worst_err": 0.0
+  },
+  {
+    "hsn": "24022090",
+    "desc": "cigarettes",
+    "real_bcd": 30.0,
+    "truth": 351200.0,
+    "runs": [
+      351200,
+      351200
+    ],
+    "exact": 2,
+    "of": 2,
+    "worst_err": 0.0
+  },
+  {
+    "hsn": "87112019",
+    "desc": "a motorcycle over 200cc",
+    "real_bcd": 100.0,
+    "truth": 1350400.0,
+    "runs": [
+      1350400,
+      787200
+    ],
+    "exact": 1,
+    "of": 2,
+    "worst_err": 563200.0
+  },
+  {
+    "hsn": "39269099",
+    "desc": "other plastic articles",
+    "real_bcd": 15.0,
+    "truth": 74940.0,
+    "runs": [
+      61960,
+      61960
+    ],
+    "exact": 0,
+    "of": 2,
+    "worst_err": 12980.0
+  },
+  {
+    "hsn": "72104900",
+    "desc": "coated flat-rolled steel",
+    "real_bcd": 15.0,
+    "truth": 562050.0,
+    "runs": [
+      416025,
+      416025
+    ],
+    "exact": 0,
+    "of": 2,
+    "worst_err": 146025.0
+  },
+  {
+    "hsn": "48025590",
+    "desc": "writing and printing paper",
+    "real_bcd": 10.0,
+    "truth": 97280.0,
+    "runs": [
+      97280,
+      97280
+    ],
+    "exact": 2,
+    "of": 2,
+    "worst_err": 0.0
+  },
+  {
+    "hsn": "62034300",
+    "desc": "men's synthetic-fibre trousers",
+    "real_bcd": 25.0,
+    "truth": 149800.0,
+    "runs": [
+      128240,
+      128240
+    ],
+    "exact": 0,
+    "of": 2,
+    "worst_err": 21560.0
+  },
+  {
+    "hsn": "20091900",
+    "desc": "orange juice",
+    "real_bcd": 35.0,
+    "truth": 82680.0,
+    "runs": [
+      73440,
+      73440
+    ],
+    "exact": 0,
+    "of": 2,
+    "worst_err": 9240.0
+  },
+  {
+    "hsn": "94036000",
+    "desc": "other wooden furniture",
+    "real_bcd": 25.0,
+    "truth": 454050.0,
+    "runs": [
+      395640,
+      395640
+    ],
+    "exact": 0,
+    "of": 2,
+    "worst_err": 58410.0
+  },
+  {
+    "hsn": "69111011",
+    "desc": "bone-china porcelain tableware",
+    "real_bcd": 20.0,
+    "truth": 80608.0,
+    "runs": [
+      80608,
+      80608
+    ],
+    "exact": 2,
+    "of": 2,
+    "worst_err": 0.0
+  }
+]
