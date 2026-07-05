@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "kha"
 version = "0.1.0"
-description = "A proven space for AI to act in. Results are computed by the environment, not the model."
+description = "An open-source framework for building 100% reliable AI agents. Answers are computed and certified by a proven environment, not guessed by the model."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

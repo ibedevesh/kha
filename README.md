@@ -1,6 +1,6 @@
 <h1 align="center">ख · Kha</h1>
-<p align="center"><b>A proven space for AI to act in.</b></p>
-<p align="center">The model moves freely, but every result is computed by an environment whose rules were<br>proven once with a kernel and an SMT solver. Not by the model.</p>
+<p align="center"><b>An open-source framework for building 100% reliable AI agents.</b></p>
+<p align="center">The agent acts inside a proven environment that computes and certifies every result.<br>Answers are computed by the environment, not guessed by the model.</p>
 
 ---
 
