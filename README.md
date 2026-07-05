@@ -138,6 +138,13 @@ Kha proves the engine **obeys the spec**, exactly. Two things remain human, by n
 **extracts the inputs correctly** (the one soft step, it supplies causes, the environment computes
 effects). Everything between is proven and out of the model's hands.
 
+## Help build this
+
+Help build this framework so we can deploy AI agents with 100% reliability in high-critical domains
+including medical, law, and the real world.
+
+See [Contributing](CONTRIBUTING.md).
+
 ## License
 
 MIT. Contact: ibedevesh@gmail.com
