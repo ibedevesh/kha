@@ -23,7 +23,7 @@ class LLM(Protocol):
 
 
 class OpenAICompatLLM:
-    """Talks to any OpenAI-compatible /chat/completions endpoint over plain HTTP (no SDK).""",
+    """Talks to any OpenAI-compatible /chat/completions endpoint over plain HTTP (no SDK)."""
 
     def __init__(self, model: str | None = None, base_url: str | None = None,
                  api_key: str | None = None, max_tokens: int = 600):

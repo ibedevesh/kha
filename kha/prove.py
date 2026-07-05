@@ -22,7 +22,7 @@ def _z3_unsat(smt_defs: str, body: str) -> str:
     import z3
     s = z3.Solver()
     s.from_string(smt_defs + "\n" + body)
-    return str(s.check())  # 'sat' | 'unsat' | 'unknown',
+    return str(s.check())  # 'sat' | 'unsat' | 'unknown'
 
 
 def prove(funcs: list[Func], figures: list[tuple], guardrails: list[tuple],
@@ -41,7 +41,7 @@ def prove(funcs: list[Func], figures: list[tuple], guardrails: list[tuple],
         all_ok = all_ok and ok
         ax = "no axioms" if r["axioms"] == set() else str(r["axioms"])
         figs.append({"func": func, "args": list(args), "value": val,
-                     "certified": ok, "axioms": sorted(r["axioms"] or [])}),
+                     "certified": ok, "axioms": sorted(r["axioms"] or [])})
         print(f"  {'✓' if ok else '✗'}  {func} {args_s} = {val:,}  ({label})  [{ax}]")
 
     print("\nZ3, proving guardrails over all inputs (unsat = unbreakable):")
@@ -54,7 +54,7 @@ def prove(funcs: list[Func], figures: list[tuple], guardrails: list[tuple],
         print(f"  {'✓' if ok else '✗'}  {label}: {res}")
 
     cert = {"funcs": funcs, "figures": figs, "guardrails": guards,
-            "all_proven": all_ok, "note": note},
+            "all_proven": all_ok, "note": note}
     Path(out).write_text(json.dumps(cert, indent=2))
     print(f"\n{'ALL PROVEN ✓' if all_ok else 'SOME FAILED ✗'}, wrote {out}")
     return cert

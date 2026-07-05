@@ -58,7 +58,7 @@ class Ledger:
         body = {"tick": tick, "state_before": state_before,
                 "move": {"kind": move.kind, "args": move.args},
                 "admitted": admitted, "reason": reason,
-                "state_after": state_after, "prev_hash": prev},
+                "state_after": state_after, "prev_hash": prev}
         e = Entry(**body, this_hash=_h(body))
         self.entries.append(e)
         return e

@@ -1,174 +1,172 @@
-[
-  {
-    "funcs": [
+{
+  "funcs": [
+    [
+      "bcd",
       [
-        "bcd",
-        [
-          "av",
-          "bcd10"
-        ],
-        "av * bcd10 // 1000"
+        "av",
+        "bcd10"
       ],
-      [
-        "sws",
-        [
-          "av",
-          "bcd10"
-        ],
-        "bcd(av, bcd10) // 10"
-      ],
-      [
-        "igstbase",
-        [
-          "av",
-          "bcd10"
-        ],
-        "av + bcd(av, bcd10) + sws(av, bcd10)"
-      ],
-      [
-        "igst",
-        [
-          "av",
-          "bcd10",
-          "igst10"
-        ],
-        "igstbase(av, bcd10) * igst10 // 1000"
-      ],
-      [
-        "cess",
-        [
-          "av",
-          "bcd10",
-          "cess10"
-        ],
-        "igstbase(av, bcd10) * cess10 // 1000"
-      ],
-      [
-        "totalduty",
-        [
-          "av",
-          "bcd10",
-          "igst10",
-          "cess10"
-        ],
-        "bcd(av, bcd10) + sws(av, bcd10) + igst(av, bcd10, igst10) + cess(av, bcd10, cess10)"
-      ]
+      "av * bcd10 // 1000"
     ],
-    "figures": [
-      {
-        "func": "totalduty",
-        "args": [
-          1000000,
-          300,
-          50,
-          0
-        ],
-        "value": 396500,
-        "certified": true,
-        "axioms": []
-      },
-      {
-        "func": "totalduty",
-        "args": [
-          2000000,
-          1250,
-          280,
-          0
-        ],
-        "value": 4080000,
-        "certified": true,
-        "axioms": []
-      },
-      {
-        "func": "totalduty",
-        "args": [
-          80000,
-          0,
-          180,
-          0
-        ],
-        "value": 14400,
-        "certified": true,
-        "axioms": []
-      },
-      {
-        "func": "totalduty",
-        "args": [
-          950000,
-          125,
-          180,
-          0
-        ],
-        "value": 325137,
-        "certified": true,
-        "axioms": []
-      },
-      {
-        "func": "totalduty",
-        "args": [
-          12500000,
-          300,
-          280,
-          120
-        ],
-        "value": 10775000,
-        "certified": true,
-        "axioms": []
-      }
+    [
+      "sws",
+      [
+        "av",
+        "bcd10"
+      ],
+      "bcd(av, bcd10) // 10"
     ],
-    "guardrails": [
-      {
-        "label": "duty >= 0 (bcd=30% igst=5% cess=0%)",
-        "result": "unsat",
-        "proven": true
-      },
-      {
-        "label": "monotonic in value (bcd=30% igst=5% cess=0%)",
-        "result": "unsat",
-        "proven": true
-      },
-      {
-        "label": "duty >= 0 (bcd=125% igst=28% cess=0%)",
-        "result": "unsat",
-        "proven": true
-      },
-      {
-        "label": "monotonic in value (bcd=125% igst=28% cess=0%)",
-        "result": "unsat",
-        "proven": true
-      },
-      {
-        "label": "duty >= 0 (bcd=0% igst=18% cess=0%)",
-        "result": "unsat",
-        "proven": true
-      },
-      {
-        "label": "monotonic in value (bcd=0% igst=18% cess=0%)",
-        "result": "unsat",
-        "proven": true
-      },
-      {
-        "label": "duty >= 0 (bcd=12.5% igst=18% cess=0%)",
-        "result": "unsat",
-        "proven": true
-      },
-      {
-        "label": "monotonic in value (bcd=12.5% igst=18% cess=0%)",
-        "result": "unsat",
-        "proven": true
-      },
-      {
-        "label": "duty >= 0 (bcd=30% igst=28% cess=12%)",
-        "result": "unsat",
-        "proven": true
-      },
-      {
-        "label": "monotonic in value (bcd=30% igst=28% cess=12%)",
-        "result": "unsat",
-        "proven": true
-      }
+    [
+      "igstbase",
+      [
+        "av",
+        "bcd10"
+      ],
+      "av + bcd(av, bcd10) + sws(av, bcd10)"
     ],
-    "all_proven": true,
-    "note": "import duty, one-time Lean+Z3 proof"
-  }
-]
+    [
+      "igst",
+      [
+        "av",
+        "bcd10",
+        "igst10"
+      ],
+      "igstbase(av, bcd10) * igst10 // 1000"
+    ],
+    [
+      "cess",
+      [
+        "av",
+        "bcd10",
+        "cess10"
+      ],
+      "igstbase(av, bcd10) * cess10 // 1000"
+    ],
+    [
+      "totalduty",
+      [
+        "av",
+        "bcd10",
+        "igst10",
+        "cess10"
+      ],
+      "bcd(av, bcd10) + sws(av, bcd10) + igst(av, bcd10, igst10) + cess(av, bcd10, cess10)"
+    ]
+  ],
+  "figures": [
+    {
+      "func": "totalduty",
+      "args": [
+        1000000,
+        300,
+        50,
+        0
+      ],
+      "value": 396500,
+      "certified": true,
+      "axioms": []
+    },
+    {
+      "func": "totalduty",
+      "args": [
+        2000000,
+        1250,
+        280,
+        0
+      ],
+      "value": 4080000,
+      "certified": true,
+      "axioms": []
+    },
+    {
+      "func": "totalduty",
+      "args": [
+        80000,
+        0,
+        180,
+        0
+      ],
+      "value": 14400,
+      "certified": true,
+      "axioms": []
+    },
+    {
+      "func": "totalduty",
+      "args": [
+        950000,
+        125,
+        180,
+        0
+      ],
+      "value": 325137,
+      "certified": true,
+      "axioms": []
+    },
+    {
+      "func": "totalduty",
+      "args": [
+        12500000,
+        300,
+        280,
+        120
+      ],
+      "value": 10775000,
+      "certified": true,
+      "axioms": []
+    }
+  ],
+  "guardrails": [
+    {
+      "label": "duty >= 0 (bcd=30% igst=5% cess=0%)",
+      "result": "unsat",
+      "proven": true
+    },
+    {
+      "label": "monotonic in value (bcd=30% igst=5% cess=0%)",
+      "result": "unsat",
+      "proven": true
+    },
+    {
+      "label": "duty >= 0 (bcd=125% igst=28% cess=0%)",
+      "result": "unsat",
+      "proven": true
+    },
+    {
+      "label": "monotonic in value (bcd=125% igst=28% cess=0%)",
+      "result": "unsat",
+      "proven": true
+    },
+    {
+      "label": "duty >= 0 (bcd=0% igst=18% cess=0%)",
+      "result": "unsat",
+      "proven": true
+    },
+    {
+      "label": "monotonic in value (bcd=0% igst=18% cess=0%)",
+      "result": "unsat",
+      "proven": true
+    },
+    {
+      "label": "duty >= 0 (bcd=12.5% igst=18% cess=0%)",
+      "result": "unsat",
+      "proven": true
+    },
+    {
+      "label": "monotonic in value (bcd=12.5% igst=18% cess=0%)",
+      "result": "unsat",
+      "proven": true
+    },
+    {
+      "label": "duty >= 0 (bcd=30% igst=28% cess=12%)",
+      "result": "unsat",
+      "proven": true
+    },
+    {
+      "label": "monotonic in value (bcd=30% igst=28% cess=12%)",
+      "result": "unsat",
+      "proven": true
+    }
+  ],
+  "all_proven": true,
+  "note": "import duty, one-time Lean+Z3 proof"
+}
