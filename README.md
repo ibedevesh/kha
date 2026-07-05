@@ -55,8 +55,8 @@ The proof is a one-time build step. It writes a `proof_certificate.json`; the ru
 
 Because every consequential step happens inside the environment, the whole run is inspectable: you
 get the result, its derivation, and a saved certificate. The AI can say anything; only the
-environment's proven figure reaches the user. See [Results](#results) for the measured gap between a
-general model on its own and the same task run inside a Kha environment.
+environment's proven figure reaches the user. See [Benchmarks](#benchmarks) for the measured gap
+between a state-of-the-art model on its own and the same task run inside a Kha environment.
 See [`theory.md`](theory.md) for the intuitions behind the design.
 
 ## Quickstart
@@ -76,34 +76,41 @@ python serve.py                         # http://127.0.0.1:8800/  (chat) and /co
 Bring your own model: Kha depends on no provider. `kha.llm` speaks any OpenAI-compatible endpoint
 via `KHA_BASE_URL` / `KHA_API_KEY` / `KHA_MODEL`, or pass your own callable.
 
-## Results
+## Benchmarks
 
-Same rules and inputs given to both a general-purpose model and the Kha environment. The oracle
-that the environment runs is the one the kernel certified.
+We tested **Claude Opus 4.8** (state of the art, July 2026) on 20 hard income-tax cases: the
+interacting rules where computation actually gets hard, marginal relief just above the surcharge
+thresholds, the dividend and capital-gains surcharge carve-out, old-regime age brackets, and company
+marginal relief. The model is handed the full, correct rules; the correct answer is the kernel-proven
+engine. Kha runs that same engine, so it is exact by construction.
 
-### Import duty, official method + real First-Schedule rates
+![Hard tax cases answered correctly](assets/accuracy.png)
 
-The model is told the method and given the inputs; the environment additionally looks up the real
-Basic Customs Duty for the HSN code.
+Opus 4.8 was fully correct on **11 of 20 cases (55%)** and wrong on the other **9 (45%)**, with
+errors up to **₹47.8 lakh**, and it gave a **different answer across runs** on the hardest cases (a
+dividend and capital-gains case, for example: ₹34.9M one run, ₹40.1M the next, correct ₹39.7M). Every
+wrong answer came with a fluent, confident justification. Kha was exact on all 20, every run,
+kernel-certified.
 
-| Import | Real BCD | Kha (proven) | A general model |
-|---|---|---|---|
-| Motor car · HSN 87032391 · ₹20L · IGST 28% | 125% | **₹40,80,000** | ~₹24,31,200 |
+![Per-case results](assets/cases_grid.png)
 
-A general model was wrong on **5 / 5** test imports, understating duty by ~**20-50%**, it both
-misremembers the published rate and mishandles the cascade (charging IGST on the wrong base). Kha
-is exact on every input, kernel-certified once.
+![Kha vs Claude Opus 4.8](assets/radar.png)
 
-### Income tax, same rules given to both
+A model can be accurate, and even consistent, on a good day. It still scores zero on the two axes
+that matter for real work: a **verifiable proof** of the answer, and being **safe by construction**
+(a model can output any number, Kha cannot output a value the rules forbid).
 
-| Model | Exact across repeated crore-scale computations |
-|---|---|
-| A smaller general model | ~10 / 24 runs |
-| A frontier general model | ~23 / 24 runs |
-| **Kha environment** | **exact, every run, kernel-certified** |
+Raw per-case results: [`assets/benchmark_opus48.json`](assets/benchmark_opus48.json). A separate
+import-duty test showed the same pattern from the other direction: even Opus 4.8 misremembers the
+official duty rate, pricing a car at ₹33,76,000 in 2 of 3 runs against the correct ₹40,80,000.
 
-The general model is fine on easy incomes and fails on the high-value ones, silently, and with a
-different wrong number each run. Kha's figure is the same every time and carries its certificate.
+### Why this matters
+
+The gap widens exactly where the stakes rise. Tax, customs, **medicine, law**, any real job with
+complex interacting rules is where a model fails most, and where a single wrong answer costs the
+most, in money or in lives. If a model is wrong on even 1 case in 100, no one will let it do the job,
+because that 1 could be theirs. Reliability here cannot be a score you nudge upward; it has to be
+total, and it has to be provable. That is what Kha is for.
 
 Sources: Finance Bill, 2026; Customs Tariff Act First Schedule (CBIC).
 
